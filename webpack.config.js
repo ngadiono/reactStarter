@@ -9,16 +9,18 @@ const paths = {
 };
 
 module.exports = {
-  entry: path.join(paths.SRC, 'App.js'),
+  entry: path.join(paths.SRC, 'index.js'),
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     contentBase: './dist',
-    hot: true
+    hot: true,
+    port: 8007
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
@@ -51,15 +53,15 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    // new CleanWebpackPlugin(['dist']),
     new HtmlWebPackPlugin({
       title: 'Web App',
-      template: './index.html'      
+      template: path.join(paths.SRC, 'index.html')
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    filename: '[hash].js',
+    filename: 'app.[hash].js',
     path: paths.DIST
   }
 };
