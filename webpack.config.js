@@ -17,10 +17,6 @@ module.exports = {
     hot: true,
     port: 8007
   },
-  output: {
-    filename: '[hash].js',
-    path: paths.DIST
-  },
   module: {
     rules: [
       {
@@ -29,6 +25,20 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -55,5 +65,9 @@ module.exports = {
       template: './index.html'
     }),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  output: {
+    filename: '[hash].js',
+    path: paths.DIST
+  }
 };
