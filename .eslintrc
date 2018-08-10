@@ -4,6 +4,8 @@
     "arrow-body-style": 0
   },
   "env": {
-    "amd": true
+    "amd": true,
+    "browser": true,
+    "node": true
   }
 }

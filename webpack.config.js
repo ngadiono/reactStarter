@@ -17,22 +17,18 @@ module.exports = {
     hot: true,
     port: 8007
   },
+  output: {
+    filename: '[hash].js',
+    path: paths.DIST
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader'
-          }
-        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -53,15 +49,11 @@ module.exports = {
     ]
   },
   plugins: [
-    // new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebPackPlugin({
       title: 'Web App',
-      template: path.join(paths.SRC, 'index.html')
+      template: './index.html'
     }),
     new webpack.HotModuleReplacementPlugin()
-  ],
-  output: {
-    filename: 'app.[hash].js',
-    path: paths.DIST
-  }
+  ]
 };

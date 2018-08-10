@@ -1,9 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-import routes from './routes';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import routes from './routes';
 
-render (
-  <Router history={browserHistory} routes={routes} />
-  , document.querySelector('#container')
+import Home from './components/landing/Home';
+import Admin from './components/admin/Dashboard';
+
+render(
+  <Router>
+      <div>
+        <Route exact path="home" component={Home} />
+        <Route path="admin" component={Admin} />
+        <Route path='*' component={Home} />
+      </div>
+  </Router>,
+  document.getElementById('app')
 );
